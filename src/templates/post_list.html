@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}
+	post list
+{% endblock %}
+
+{% block body %}
+
+	{% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+    </ul>
+	{% endif %}
+
+	<div class="col-sm-6 col-sm-offset-3">
+	<div class="row">
+
+	
+	<!-- <p>title : {{instance.title}}</p></br>
+	<p>content : {{instance.content}}</p></br>
+	<p>update : {{instance.update}}</p></br>
+	<p>timestamp : {{instance.timestamp}}</p></br>
+	<p>id : {{instance.id}}</p></br></br></br> -->
+
+	<div class="col-sm-12">
+    <div class="thumbnail">
+      <!-- <img src="..." alt="..."> -->
+      <div class="caption">
+        <h3 >{{instance.title}} &nbsp<small> {% if instance.draft %} <span style="color:red;">Draft : </span>{%endif%}{{instance.publish}} </small> </h3>
+        {% if instance.user.get_full_name %}
+        <p>Author: {{instance.user.get_full_name}}</p>
+
+        {% endif %}
+        
+
+        {% if instance.image %}
+        <img src="{{instance.image.url}}" class="img-responsive"/>
+        {% endif %}
+          </br>
+
+          <p>
+        <div class="fb-like" data-href="{{request.build_absolute_uri}}" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        </p>
+        </hr>
+        <!-- <p>        
+         <a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}">
+        Facebook
+        </a>
+
+        <a href="https://twitter.com/home?status={{ share_string }}%20{{request.build_absolute_uri}}">
+        Twitter
+        </a>
+
+        <a href='https://plus.google.com/share?url={{request.build_absolute_uri}}'>Google Plus</a>
+
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{request.build_absolute_uri}}&title={{ instance.title }}&summary={{ share_string }}&source={{request.build_absolute_uri}}">
+        Linkedin
+        </a>
+
+        <a href="http://www.reddit.com/submit?url={{request.build_absolute_uri}}&title={{ instance.title }}">Reddit</a>
+
+         <a data-pin-do="buttonBookmark" href="//www.pinterest.com/pin/create/button/"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png" /></a> 
+        </p> -->
+        
+        <p>{{instance.content | linebreaks   }}</p>
+
+       <div class="fb-comments" data-href="{{request.build_absolute_uri}}" data-numposts="5"></div>
+      </div>
+    </div>
+  </div>
+
+	</div>
+	</div>
+
+
+{% endblock %}
+
+
